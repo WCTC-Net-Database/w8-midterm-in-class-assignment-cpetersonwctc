@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using W8_assignment_template.Helpers;
 using W8_assignment_template.Interfaces;
+using W8_assignment_template.Models.Rooms;
 
 namespace W8_assignment_template.Models.Characters;
 
@@ -36,7 +37,7 @@ public abstract class CharacterBase : ICharacter
 
     public void Attack(ICharacter target)
     {
-        // TODO Update this method to ensure the character is removed after attacking them
+        // OK.. SOOO- the enemies dont actually get removed; but instead their health is set to 0, and they wont appear for attacking anymore
 
         OutputManager.WriteLine($"{Name} attacks {target.Name} with a chilling touch.", ConsoleColor.Blue);
 
@@ -46,6 +47,8 @@ public abstract class CharacterBase : ICharacter
             player.Gold += 10; // Assuming each treasure is worth 10 gold
             targetWithTreasure.Treasure = null; // Treasure is taken
             OutputManager.WriteLine($"{Name} now has {player.Gold} gold", ConsoleColor.Blue);
+
+            target.HP = 0;
         }
         else if (this is Player playerWithGold && target is Player targetWithGold && targetWithGold.Gold > 0)
         {
@@ -64,7 +67,11 @@ public abstract class CharacterBase : ICharacter
             OutputManager.WriteLine($"{Name} has entered {_currentRoom.Name}. {_currentRoom.Description}", ConsoleColor.Green);
             foreach (var character in _currentRoom.Characters)
             {
-                OutputManager.WriteLine($"{character.Name} is here.", ConsoleColor.Red);
+                //added if statement so monsters wont display as "here" if they are dead...
+                if(character.HP > 0)
+                {
+                    OutputManager.WriteLine($"{character.Name} is here.", ConsoleColor.Red);
+                }
             }
         }
         else

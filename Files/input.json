@@ -47,5 +47,21 @@
     "Level": 2,
     "HP": 8,
     "Treasure": null
+  },
+  {
+    "$type": "Kobold",
+    "Name": "Silly Kobold",
+    "Type": "Kobold",
+    "Level": 1,
+    "HP": 3,
+    "Treasure": "drake's scale"
+  },
+  {
+    "$type": "Drake",
+    "Name": "Abyssal Drake",
+    "Type": "Drake",
+    "Level": 6,
+    "HP": 24,
+    "Treasure": "extra sharp talon"
   }
 ]
